@@ -109,7 +109,15 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     public func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle{
         return UITableViewCellEditingStyle.init(rawValue: UITableViewCellEditingStyle.insert.rawValue | UITableViewCellEditingStyle.delete.rawValue)!
     }
-    
+    //MARK --  swift3.0 tableviewcell分割线显示不全解决方案
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if cell.responds(to:#selector(setter: UIView.layoutMargins)) {
+            cell.layoutMargins = UIEdgeInsets.zero
+        }
+        if cell.responds(to: #selector(setter: UITableViewCell.separatorInset)) {
+            cell.separatorInset = UIEdgeInsets.zero
+        }
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
